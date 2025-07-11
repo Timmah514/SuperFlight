@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8f2uyk4rr11n"]
+
+[ext_resource type="Script" uid="uid://76l6c0cbsd2g" path="res://Ui/Bar.gd" id="1_k2jwt"]
+
+[node name="HUD" type="CanvasLayer"]
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="HealthBar" type="ProgressBar" parent="Node2D"]
+visible = false
+offset_right = 395.0
+offset_bottom = 27.0
+script = ExtResource("1_k2jwt")
+type = "hp"
+
+[node name="EnergyBar" type="ProgressBar" parent="Node2D"]
+offset_left = 379.0
+offset_top = 7.0
+offset_right = 774.0
+offset_bottom = 42.0
+script = ExtResource("1_k2jwt")
+type = "energy"

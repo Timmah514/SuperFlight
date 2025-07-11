@@ -1,0 +1,61 @@
+[gd_scene load_steps=9 format=3 uid="uid://wjhj87jbulhd"]
+
+[ext_resource type="PackedScene" uid="uid://b8f2uyk4rr11n" path="res://Ui/hud.tscn" id="1_cxnlx"]
+[ext_resource type="PackedScene" uid="uid://c1424mm80d8rq" path="res://player.tscn" id="1_fy3fq"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2ummi"]
+sky_top_color = Color(0.31, 0.506333, 0.62, 1)
+sky_horizon_color = Color(0.67, 0.513667, 0.402, 1)
+ground_bottom_color = Color(0.670588, 0.513726, 0.403922, 1)
+ground_horizon_color = Color(0.670588, 0.513726, 0.403922, 1)
+
+[sub_resource type="Sky" id="Sky_wh0y7"]
+sky_material = SubResource("ProceduralSkyMaterial_2ummi")
+
+[sub_resource type="Environment" id="Environment_26og4"]
+background_mode = 2
+sky = SubResource("Sky_wh0y7")
+volumetric_fog_albedo = Color(1, 0.948, 0.74, 1)
+volumetric_fog_length = 10.0
+adjustment_enabled = true
+adjustment_brightness = 1.1
+adjustment_contrast = 1.05
+adjustment_saturation = 1.25
+
+[sub_resource type="BoxMesh" id="BoxMesh_2cig8"]
+size = Vector3(2500, 5, 2500)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2cig8"]
+albedo_color = Color(0.5, 0.5, 0.5, 1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_2cig8"]
+data = PackedVector3Array(-1250, 2.5, 1250, 1250, 2.5, 1250, -1250, -2.5, 1250, 1250, 2.5, 1250, 1250, -2.5, 1250, -1250, -2.5, 1250, 1250, 2.5, -1250, -1250, 2.5, -1250, 1250, -2.5, -1250, -1250, 2.5, -1250, -1250, -2.5, -1250, 1250, -2.5, -1250, 1250, 2.5, 1250, 1250, 2.5, -1250, 1250, -2.5, 1250, 1250, 2.5, -1250, 1250, -2.5, -1250, 1250, -2.5, 1250, -1250, 2.5, -1250, -1250, 2.5, 1250, -1250, -2.5, -1250, -1250, 2.5, 1250, -1250, -2.5, 1250, -1250, -2.5, -1250, 1250, 2.5, 1250, -1250, 2.5, 1250, 1250, 2.5, -1250, -1250, 2.5, 1250, -1250, 2.5, -1250, 1250, 2.5, -1250, -1250, -2.5, 1250, 1250, -2.5, 1250, -1250, -2.5, -1250, 1250, -2.5, 1250, 1250, -2.5, -1250, -1250, -2.5, -1250)
+
+[node name="TestArea" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_26og4")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+light_color = Color(1, 0.831, 0.61, 1)
+light_energy = 0.8
+light_angular_distance = 4.55
+light_bake_mode = 1
+shadow_enabled = true
+sky_mode = 1
+
+[node name="HUD" parent="." instance=ExtResource("1_cxnlx")]
+
+[node name="Player" parent="." instance=ExtResource("1_fy3fq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -194.158, 2.52901, 316.36)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+mesh = SubResource("BoxMesh_2cig8")
+surface_material_override/0 = SubResource("StandardMaterial3D_2cig8")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_2cig8")
