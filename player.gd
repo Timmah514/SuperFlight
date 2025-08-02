@@ -70,16 +70,6 @@ func _process(delta):
 	#camera.fov = 80 + (5.0 * ( velocity.length() / maxFlySpeed))
 	
 	move_and_slide()
-	
-	#position reset
-	if global_position.x > 70:
-		global_position.x -= 560
-	elif global_position.x < -490:
-		global_position.x += 560
-	elif global_position.z > 612:
-		global_position.z -= 560
-	elif global_position.z < 52:
-		global_position.z += 560
 
 func _input(event):    
 	#mouse look     
